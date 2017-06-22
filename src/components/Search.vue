@@ -16,8 +16,9 @@
           {{ start + 1 }} to {{ end }} of {{ meta.total }} results ({{ meta.took }} seconds)
         </p>
         <search-results :query="query" :items="hits"></search-results>
+        <!-- elastic search only allow -->
         <el-pagination layout="prev, pager, next"
-          :total="Math.min(meta.total, 10000)"
+          :total="totalMax"
           :page-size="size"
           :current-page.sync="currentPage"
           @current-change="gotoPage"
@@ -59,6 +60,11 @@ export default {
     },
     totalPage () {
       return Math.ceil(this.meta.total / this.size)
+    },
+    totalMax () {
+      // elastic search only allows at most 10,000 items
+      // when using `from` and `size`
+      return Math.min(this.meta.total, 10000)
     }
   },
   methods: {

@@ -44,7 +44,9 @@ function cleanHitItem (item) {
   return {
     title: item.fields.title[0].trim(),
     title_h: title_h[0],
-    exerpt: text_h.slice(0, 2).join(' '),
+    // 1 piece of highlighted text is too short,
+    // 3 pieces are too long
+    exerpt: text_h.slice(0, 2).join(' ... '),
     url: item.fields.url[0],
     url_h: url_h[0],
     date: new Date(item._source['headers.last-modified'])
