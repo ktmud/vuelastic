@@ -6,6 +6,7 @@
  * Distributed under terms of the MIT license.
  */
 import { Client } from 'elasticsearch-browser'
+import moment from 'moment'
 
 const api = new Client({
   httpAuth: 'elastic:changeme',
@@ -31,7 +32,7 @@ api.queryBody = function(query, from, size) {
       }
     },
     "stored_fields": [ "title", "url" ],
-    "_source": [ "headers.last-modified" ]
+    "_source": [ "headers.last-modified", "headers.date" ]
   }
 }
 
@@ -41,6 +42,9 @@ function cleanHitItem (item) {
   var text_h = item.highlight.text || item.fields.text || []
   var title_h = item.highlight.title || item.fields.title || []
   var url_h = item.highlight.url || item.fields.url || []
+  var headers = item._source.headers || {}
+  var lastModified = headers['last-modified']
+  var date = lastModified ? new Date(lastModified) : null
   return {
     title: item.fields.title[0].trim(),
     title_h: title_h[0],
@@ -49,8 +53,22 @@ function cleanHitItem (item) {
     exerpt: text_h.slice(0, 2).join(' ... '),
     url: item.fields.url[0],
     url_h: url_h[0],
-    date: new Date(item._source['headers.last-modified'])
+    date: date,
+    pretty_date: text_h ? prettyDate(date) : ''
   }
+}
+
+var DAY = 60*60*24*1000
+
+function prettyDate (date) {
+  console.log(date)
+  if (isNaN(date) || date === null) {
+    return ''
+  }
+  if (new Date() - date > 180 * DAY) {
+    return moment(date).format('YYYY-MM-DD')
+  }
+  return moment(date).fromNow()
 }
 
 api.search = opt => {

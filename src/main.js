@@ -2,6 +2,7 @@
 // (runtime-only or standalone) has been set in webpack.base.conf with an alias.
 import Vue from 'vue'
 import ElementUI from 'element-ui'
+import VueMoment from 'vue-moment'
 import App from './App'
 import router from './router'
 
@@ -10,6 +11,7 @@ import 'leaflet/dist/leaflet.css'
 
 Vue.config.productionTip = false
 
+Vue.use(VueMoment);
 Vue.use(ElementUI)
 
 /* eslint-disable no-new */

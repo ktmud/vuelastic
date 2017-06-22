@@ -7,7 +7,10 @@
         </a>
       </h4>
       <p class="result-url" v-html="item.url_h"></p>
-      <p class="result-exerpt" v-html="item.exerpt"></p>
+      <p class="result-desc">
+        <span class="result-date" v-if="item.pretty_date">{{ item.pretty_date }} -</span>
+        <span class="result-exerpt" v-html="item.exerpt"></span>
+      </p>
     </div>
     <div class="no-result" v-if="items.length == 0">No more results can be found.</div>
   </div>
@@ -55,4 +58,8 @@ export default {
     max-height: 1.3em;
     overflow: hidden;
     white-space: nowrap;
+.result-date
+  display: inline-block;
+  color: #666;
+  margin-right: 2px;
 </style>
