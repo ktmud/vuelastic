@@ -4,7 +4,8 @@
 
 A simple ElasticSearch web interface.
 
-![Example](static/example.png)
+![Example - 1](static/example-1.png)
+![Example - 2](static/example-2.png)
 
 ## Build Setup
 
