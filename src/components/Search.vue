@@ -1,5 +1,5 @@
 <template>
-  <div class="search-results" v-loading="loading">
+  <div class="search-results container" v-loading="loading">
     <div class="results" v-if="!loading">
       <p class="no-results" v-if="!hasQuery">
         What do you want to search today?

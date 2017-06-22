@@ -1,5 +1,5 @@
 <template>
-  <div class="home">
+  <div class="home container">
     <h1>Vuelastic Search</h1>
     <search-form class="big-search" icon="search" />
   </div>
