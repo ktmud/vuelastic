@@ -1,9 +1,8 @@
 {
   "name": "vuelastic",
-  "version": "1.0.0",
+  "version": "0.0.1",
   "description": "ElasticSearch interface built on top of Vue",
   "author": "Jesse Yang <kissmud@gmail.com>",
-  "private": true,
   "scripts": {
     "dev": "node build/dev-server.js",
     "start": "node build/dev-server.js",

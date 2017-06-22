@@ -1,6 +1,6 @@
 # vuelastic
 
-> ElasticSearch Web Search interface built on top of Vue
+> ElasticSearch Web Search interface built on top of Vue and Element UI
 
 A simple ElasticSearch web interface.
 
