@@ -1,0 +1,163 @@
+<template>
+  <div class="search-results" v-loading="loading">
+    <div class="results" v-if="!loading">
+      <p class="no-results" v-if="!hasQuery">
+        What do you want to search today?
+      </p>
+      <p class="no-results" v-if="hasQuery && !hasResults">
+        Nothing Found. :(
+      </p>
+      <el-alert type="error" v-if="error" show-icon
+        :title="error.title"
+        :description="error.description"
+        ></el-alert>
+      <div class="results" v-if="hasResults">
+        <p class="results-count text-sm">
+          {{ start + 1 }} to {{ end }} of {{ meta.total }} results ({{ meta.took }} seconds)
+        </p>
+        <search-results :query="query" :items="hits"></search-results>
+        <el-pagination layout="prev, pager, next"
+          :total="Math.min(meta.total, 10000)"
+          :page-size="size"
+          :current-page.sync="currentPage"
+          @current-change="gotoPage"
+          ></el-pagination>
+      </div>
+    </div>
+  </div>
+</template>
+
+<script>
+import router from '@/router'
+import api from './search/api'
+import SearchResults from './search/results'
+
+export default {
+  name: 'search',
+  data () {
+    return {
+      loading: true,
+      error: null,
+      query: '',
+      index: '',
+      start: 0,
+      size: 0,
+      currentPage: 1,
+      meta: {},
+      hits: []
+    }
+  },
+  computed: {
+    end () {
+      return Math.min(this.meta.total, this.start + this.size)
+    },
+    hasResults () {
+      return this.meta.total > 0
+    },
+    hasQuery () {
+      return this.query.length > 0
+    },
+    totalPage () {
+      return Math.ceil(this.meta.total / this.size)
+    }
+  },
+  methods: {
+    updateQuery ($route) {
+      $route = $route || this.$route
+      var query = $route.query
+      this.query = (query.q || '').trim()
+      this.index = (query.index || '').trim()
+      this.start = parseInt(query.start) || 0
+      // page size
+      this.size = parseInt(query.size) || 20
+    },
+    loadResults () {
+      api.search({
+        index: api.defaultIndex || this.index,
+        query: this.query,
+        start: this.start,
+        size: this.size
+      }).then(
+        (body) => {
+          this.meta = body.meta
+          this.hits = body.hits
+          this.loading = false
+        },
+        (error) => {
+          this.error = {
+            title: error.statusCode + ' ' + error.displayName,
+            description: error.message,
+          }
+          this.loading = false
+        }
+      )
+    },
+    gotoPage (page) {
+      var start = (page - 1) * this.size
+      router.push({
+        name: 'search',
+        query: {
+          q: this.query,
+          start: start,
+          size: this.size
+        }
+      })
+    }
+  },
+  watch: {
+    '$route' (to, from) {
+      this.updateQuery(to)
+      this.loading = true
+      this.loadResults()
+    }
+  },
+  beforeMount () {
+    this.updateQuery()
+    if (!this.query) {
+      this.loading = false;
+    }
+  },
+  mounted () {
+    if (!this.loading) {
+      return;
+    }
+    this.loadResults()
+  },
+  components: {
+    SearchResults
+  }
+}
+</script>
+
+<style lang="sass">
+.text-sm
+  font-size: 13px;
+
+.search-results
+  max-width: 600px;
+  min-height: 200px;
+  padding-bottom: 80px;
+  .el-loading-mask
+    padding: 80px 0;
+    max-width: 360px;
+
+.el-alert__description
+  padding-bottom: 5px;
+
+.el-pagination
+  padding: 15px 0;
+.el-pager li
+  font-size: 16px;
+  min-width: 32px;
+  padding-left: 8px;
+  padding-right: 8px;
+  height: 32px;
+  line-height: 31px;
+.el-pagination span, .el-pagination button
+  font-size: 16px;
+  min-width: 32px;
+  height: 32px;
+  line-height: 32px;
+.el-pager li.btn-quicknext, .el-pager li.btn-quickprev
+  line-height: 31px;
+</style>

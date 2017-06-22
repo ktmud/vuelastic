@@ -1,0 +1,91 @@
+@import "./theme-variables";
+
+html
+  height: 100%
+
+h1
+  font-weight: 200;
+  margin: 4% 0 2%;
+
+#app
+  overflow: hidden;
+  padding-bottom: 80px;
+
+body
+  margin: 0;
+  font-family: "Helvetica Neue",Helvetica,"PingFang SC","Hiragino Sans GB","Microsoft YaHei",Arial,sans-serif;
+  font-weight: 400;
+  position: relative;
+  min-height: 100%;
+  -webkit-font-smoothing: antialiased;
+
+footer
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  background: #f9f9f9;
+  padding: 15px 0 30px;
+  font-size: 12px;
+  color: #89909a;
+  a:visited, a:visited:hover
+    color: $color-link;
+
+a
+  color: $color-link;
+  text-decoration: none;
+  &:hover
+    color: $color-link-hover;
+  &:visited
+    color: $color-link-visited;
+
+.site-logo
+  height: 60px;
+  line-height: 60px;
+  text-align: center;
+  display: block;
+  font-size: 14px;
+  color: $color-link;
+  &:hover
+    background: #f9f9f9
+
+a.site-logo:visited
+  color: $color-link;
+
+.main
+  min-height: 160px;
+
+header
+  min-height: 60px;
+  .el-menu
+    background: none;
+
+  form
+    margin: 12px 0;
+    display: inline-block;
+
+  .el-input__inner
+    border-radius: 2px;
+
+.search-form
+  max-width: 540px;
+  .el-input__icon
+    cursor: pointer;
+    width: 48px;
+    text-align: center;
+  .el-input__inner
+    border-radius: 2px;
+    border-color: #dae3ef;
+    border-bottom-color: #c5cdd8;
+    box-shadow: 0 0 0 rabg(0,0,0,0);
+    transition-property: all;
+    &:focus, &:hover
+      box-shadow: 0 3px 2px rgba(0,0,0,0.08);
+      border-color: #c5cdd8;
+.big-search
+  .el-input
+    font-size: 18px;
+  .el-input__inner
+    font-size: 18px;
+    line-height: 34px;
+    height: auto;
