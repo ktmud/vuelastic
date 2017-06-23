@@ -7,7 +7,7 @@
         </a>
       </h4>
       <p class="result-url" v-html="item.url_h"></p>
-      <p class="result-desc">
+      <p class="result-desc" v-if="item.exerpt">
         <span class="result-date" v-if="item.pretty_date">{{ item.pretty_date }} -</span>
         <span class="result-exerpt" v-html="item.exerpt"></span>
       </p>

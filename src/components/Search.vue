@@ -65,7 +65,7 @@ export default {
       // elastic search only allows at most 10,000 items
       // when using `from` and `size`
       return Math.min(this.meta.total, 10000)
-    }
+    },
   },
   methods: {
     updateQuery ($route) {
@@ -76,6 +76,7 @@ export default {
       this.start = parseInt(query.start) || 0
       // page size
       this.size = parseInt(query.size) || 20
+      this.currentPage = Math.ceil((this.start + 1) / this.size)
     },
     loadResults () {
       api.search({

@@ -25,6 +25,8 @@ api.queryBody = function(query, from, size) {
     "from": from,
     "query": query,
     "highlight": {
+      "number_of_fragments": 2,
+      "fragment_size": 200,
       "fields": {
         "title": {},
         "url": {},
@@ -50,7 +52,7 @@ function cleanHitItem (item) {
     title_h: title_h[0],
     // 1 piece of highlighted text is too short,
     // 3 pieces are too long
-    exerpt: text_h.slice(0, 2).join(' ... '),
+    exerpt: text_h.join(' ... '),
     url: item.fields.url[0],
     url_h: url_h[0],
     date: date,
@@ -61,10 +63,10 @@ function cleanHitItem (item) {
 var DAY = 60*60*24*1000
 
 function prettyDate (date) {
-  console.log(date)
   if (isNaN(date) || date === null) {
     return ''
   }
+  // if too far away, display full date
   if (new Date() - date > 180 * DAY) {
     return moment(date).format('YYYY-MM-DD')
   }
