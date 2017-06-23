@@ -8,7 +8,7 @@
           </router-link>
         </el-col>
         <el-col :span="18">
-          <search-form inline icon="search" size="45" />
+          <search-form inline icon="search" size="76" />
         </el-col>
       </el-row>
     </header>

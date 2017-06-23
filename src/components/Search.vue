@@ -152,19 +152,20 @@ export default {
   padding-bottom: 5px;
 
 .el-pagination
-  padding: 15px 0;
+  padding: 20px 0;
 .el-pager li
-  font-size: 16px;
-  min-width: 32px;
+  font-size: 17px;
+  min-width: 36px;
   padding-left: 8px;
   padding-right: 8px;
-  height: 32px;
-  line-height: 31px;
+  height: 36px;
+  line-height: 36px;
 .el-pagination span, .el-pagination button
-  font-size: 16px;
-  min-width: 32px;
-  height: 32px;
-  line-height: 32px;
+  font-size: 17px;
+  min-width: 36px;
+  height: 36px;
+  line-height: 36px;
 .el-pager li.btn-quicknext, .el-pager li.btn-quickprev
-  line-height: 31px;
+  font-size: 12px;
+  line-height: 36px;
 </style>
