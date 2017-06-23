@@ -33,8 +33,10 @@ api.queryBody = function(query, from, size) {
         "text": {}
       }
     },
-    "stored_fields": [ "title", "url" ],
-    "_source": [ "headers.last-modified", "headers.date" ]
+    "stored_fields": [
+      "title", "url", "headers.last-modified", "headers.date", "depth"
+    ],
+    "_source": false
   }
 }
 
@@ -44,18 +46,19 @@ function cleanHitItem (item) {
   var text_h = item.highlight.text || item.fields.text || []
   var title_h = item.highlight.title || item.fields.title || []
   var url_h = item.highlight.url || item.fields.url || []
-  var headers = item._source.headers || {}
+  var headers = item.fields.headers || {}
   var lastModified = headers['last-modified']
   var date = lastModified ? new Date(lastModified) : null
   return {
     title: item.fields.title[0].trim(),
-    title_h: title_h[0],
+    title_h: title_h[0] || '[UNTITLED]',
     // 1 piece of highlighted text is too short,
     // 3 pieces are too long
     exerpt: text_h.join(' ... '),
     url: item.fields.url[0],
     url_h: url_h[0],
     date: date,
+    depth: item.fields.depth[0],
     pretty_date: text_h ? prettyDate(date) : ''
   }
 }

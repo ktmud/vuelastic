@@ -5,6 +5,9 @@
         <a :href="item.url" target="_blank" :title="item.title">
           <span v-html="item.title_h"></span>
         </a>
+        <el-tooltip :content="'Link depth: ' + item.depth" placement="right">
+          <span class="badge">{{ item.depth }}</span>
+        </el-tooltip>
       </h4>
       <p class="result-url" v-html="item.url_h"></p>
       <p class="result-desc" v-if="item.exerpt">
@@ -35,6 +38,17 @@ export default {
   // padding: 0.5em 1em;
   // border: 1px solid #f0f0f0;
   // box-shadow: 0 2px 0 rgba(0,0,0,0.04);
+  .badge
+    background: #f3f3f3;
+    border-radius: 50%;
+    display: inline-block;
+    color: #aaa;
+    line-height: 1;
+    width: 1em;
+    text-align: center;
+    padding: 4px;
+    font-size: 13px;
+    vertical-align: top;
   em
     font-weight: 600;
     font-style: normal;
