@@ -87,7 +87,7 @@ api.search = opt => {
       }
     }
   }
-  return api._search({
+  var promise = api._search({
     index: opt.index,
     body: api.queryBody(query, opt.start, opt.size)
   }).then(body => {
@@ -99,6 +99,13 @@ api.search = opt => {
       hits: body.hits.hits.map(cleanHitItem)
     }
   })
+  return promise
+  // for testing delayed response
+  //return new Promise((resolve, reject) => {
+    //setTimeout(() => {
+      //resolve(promise)
+    //}, 1500)
+  //})
 }
 
 export default api

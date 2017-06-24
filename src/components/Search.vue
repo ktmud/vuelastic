@@ -146,9 +146,10 @@ export default {
   padding-bottom: 80px;
   .el-loading-mask
     padding: 80px 0;
-    max-width: 360px;
 
 .el-alert__description
   padding-bottom: 5px;
 
+.el-loading-mask.el-loading-fade-enter-active
+  transition-delay: 1s;
 </style>
