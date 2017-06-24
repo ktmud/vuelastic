@@ -44,13 +44,14 @@ api._search = api.search
 
 function cleanHitItem (item) {
   var text_h = item.highlight.text || item.fields.text || []
+  var title = item.fields.title || []
   var title_h = item.highlight.title || item.fields.title || []
   var url_h = item.highlight.url || item.fields.url || []
   var headers = item.fields.headers || {}
   var lastModified = headers['last-modified']
   var date = lastModified ? new Date(lastModified) : null
   return {
-    title: item.fields.title[0].trim(),
+    title: (title[0] || '').trim(),
     title_h: title_h[0] || '[UNTITLED]',
     // 1 piece of highlighted text is too short,
     // 3 pieces are too long
