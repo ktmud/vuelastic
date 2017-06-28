@@ -78,22 +78,4 @@ export default {
   display: inline-block;
   color: #666;
   margin-right: 2px;
-
-.el-pagination
-  padding: 20px 0;
-.el-pager li
-  font-size: 16px;
-  min-width: 34px;
-  padding-left: 8px;
-  padding-right: 8px;
-  height: 34px;
-  line-height: 34px;
-.el-pagination span, .el-pagination button
-  font-size: 16px;
-  min-width: 34px;
-  height: 34px;
-  line-height: 34px;
-.el-pager li.btn-quicknext, .el-pager li.btn-quickprev
-  font-size: 12px;
-  line-height: 34px;
 </style>

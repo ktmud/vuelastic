@@ -7,11 +7,10 @@ import App from './App'
 import router from './router'
 
 import '../theme/index.css'
-import 'leaflet/dist/leaflet.css'
 
 Vue.config.productionTip = false
 
-Vue.use(VueMoment);
+Vue.use(VueMoment)
 Vue.use(ElementUI)
 
 /* eslint-disable no-new */
