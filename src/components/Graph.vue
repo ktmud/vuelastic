@@ -61,7 +61,7 @@ export default {
         // scalingMode: 'outside',
         // enableEdgeHovering: true,
         // edgeHoverSizeRatio: 2,
-        minEdgeSize: 0.2,
+        minEdgeSize: 0.1,
         maxEdgeSize: 2,
         minNodeSize: 1,
         maxNodeSize: 5
@@ -69,12 +69,16 @@ export default {
     }, (s) => {
       var arr = array(s.graph.nodes())
       var domain = arr.extent()
-      var segsize = Math.round(arr.length / 5)
+      var segsize = Math.ceil(arr.length / 5)
       var sorted = arr.sorted()
       var nodeColor = color.domain([0, arr.length])
-      var nodeX = scaleLinear().domain([0, segsize]).range([0, 15])
+      var nodeX = scaleLinear().domain([0, segsize]).range([0, 7])
       // put nodes into rows
-      var nodeY = scaleQuantize().domain([0, arr.length]).range([0, 1, 2, 3, 4, 5])
+      // needs plus one segsize here because d3 scales
+      // are not end point inclusive
+      var nodeY = scaleQuantize()
+        .domain([0, arr.length + segsize])
+        .range([0, 1, 2, 3, 4, 5])
 
       var seenIdx = {}
 
@@ -90,7 +94,7 @@ export default {
           seenIdx[node.weight] = idx
         }
         // console.log(idx)
-        node.x = nodeX(idx % (segsize - 20))
+        node.x = nodeX(idx % segsize)
         node.y = nodeY(idx)
         // the position of current node in a sorted list
         node.size = node.weight

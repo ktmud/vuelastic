@@ -47,9 +47,8 @@ function cleanHitItem (item) {
   var title = item.fields.title || []
   var title_h = item.highlight.title || item.fields.title || []
   var url_h = item.highlight.url || item.fields.url || []
-  var headers = item.fields.headers || {}
-  var lastModified = headers['last-modified']
-  var date = lastModified ? new Date(lastModified) : null
+  var lastModified = item.fields['headers.last-modified']
+  var date = lastModified ? new Date(lastModified[0]) : null
   return {
     title: (title[0] || '').trim(),
     title_h: title_h[0] || '[UNTITLED]',
