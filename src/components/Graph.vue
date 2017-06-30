@@ -72,7 +72,7 @@ export default {
       var segsize = Math.round(arr.length / 5)
       var sorted = arr.sorted()
       var nodeColor = color.domain([0, arr.length])
-      var nodeX = scaleLinear().domain([0, segsize]).range([0, 12])
+      var nodeX = scaleLinear().domain([0, segsize]).range([0, 15])
       // put nodes into rows
       var nodeY = scaleQuantize().domain([0, arr.length]).range([0, 1, 2, 3, 4, 5])
 
