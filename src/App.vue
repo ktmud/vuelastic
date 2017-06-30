@@ -13,11 +13,7 @@
       </el-row>
     </header>
     <div class="main">
-      <el-row>
-        <el-col :span="21" :offset="3" :xs="{offset:0, span:24}">
-          <router-view></router-view>
-        </el-col>
-      </el-row>
+      <router-view></router-view>
     </div>
     <footer>
       <div class="container">
@@ -25,6 +21,7 @@
           <el-col :span="21" :offset="3" :xs="{offset:0, span:24}">
             &copy; 2017 <a href="http://github.com/ktmud/vuelastic" target="_blank">Vuelastic Search</a>
                    by <a href="http://github.com/ktmud" target="_blank">ktmud</a>
+              - <router-link to="graph">Graph</router-link>
           </el-col>
         </el-row>
       </div>

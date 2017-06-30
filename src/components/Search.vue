@@ -1,30 +1,34 @@
 <template>
-  <div class="search-results container" v-loading="loading">
-    <div class="results" v-if="!loading">
-      <p class="no-results" v-if="!hasQuery">
-        What do you want to search today?
-      </p>
-      <p class="no-results" v-if="hasQuery && !hasResults">
-        Nothing Found. :(
-      </p>
-      <el-alert type="error" v-if="error" show-icon
-        :title="error.title"
-        :description="error.description"
-        ></el-alert>
-      <div class="results" v-if="hasResults">
-        <p class="results-count text-sm">
-          {{ start + 1 }} to {{ end }} of {{ meta.total }} results ({{ meta.took }} seconds)
-        </p>
-        <search-results :query="query" :items="hits"></search-results>
-        <!-- elastic search only allow -->
-        <el-pagination layout="prev, pager, next"
-          :total="totalMax"
-          :page-size="size"
-          :current-page.sync="currentPage"
-          @current-change="gotoPage"
-          ></el-pagination>
-      </div>
-    </div>
+  <div class="search-results" v-loading="loading">
+    <el-row>
+      <el-col :span="21" :offset="3" :xs="{offset:0, span:24}">
+        <div class="container results" v-if="!loading">
+          <p class="no-results" v-if="!hasQuery">
+            What do you want to search today?
+          </p>
+          <p class="no-results" v-if="hasQuery && !hasResults">
+            Nothing Found. :(
+          </p>
+          <el-alert type="error" v-if="error" show-icon
+            :title="error.title"
+            :description="error.description"
+            ></el-alert>
+          <div class="results" v-if="hasResults">
+            <p class="results-count text-sm">
+              {{ start + 1 }} to {{ end }} of {{ meta.total }} results ({{ meta.took }} seconds)
+            </p>
+            <search-results :query="query" :items="hits"></search-results>
+            <!-- elastic search only allow -->
+            <el-pagination layout="prev, pager, next"
+              :total="totalMax"
+              :page-size="size"
+              :current-page.sync="currentPage"
+              @current-change="gotoPage"
+              ></el-pagination>
+          </div>
+        </div>
+    </el-col>
+  </el-row>
   </div>
 </template>
 
@@ -141,9 +145,10 @@ export default {
   font-size: 13px;
 
 .search-results
-  max-width: 600px;
-  min-height: 200px;
-  padding-bottom: 80px;
+  .container
+    max-width: 600px;
+    min-height: 200px;
+    padding-bottom: 80px;
   .el-loading-mask
     padding: 80px 0;
 

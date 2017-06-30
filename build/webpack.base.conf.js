@@ -2,6 +2,7 @@ var path = require('path')
 var url = require('url')
 var utils = require('./utils')
 var config = require('../config')
+var webpack = require('webpack')
 var vueLoaderConfig = require('./vue-loader.conf')
 
 function resolve (dir) {
@@ -28,6 +29,10 @@ module.exports = {
   },
   module: {
     rules: [
+      {
+        test: /sigma.*/,
+        use: 'imports-loader?this=>window'
+      },
       {
         test: /\.vue$/,
         loader: 'vue-loader',
@@ -56,4 +61,9 @@ module.exports = {
       }
     ]
   },
+  plugins: [
+    new webpack.ProvidePlugin({
+      sigma: 'sigma'
+    })
+  ]
 }

@@ -6,6 +6,7 @@ import Home from '@/components/Home'
 Vue.use(ElementUI)
 Vue.use(Router)
 
+import Graph from '@/components/Graph'
 import Search from '@/components/Search'
 import SearchForm from '@/components/search/form'
 
@@ -23,6 +24,11 @@ export default new Router({
       path: '/search',
       name: 'search',
       component: Search
-    }
+    },
+    {
+      path: '/graph',
+      name: 'graph',
+      component: Graph
+    },
   ]
 })
